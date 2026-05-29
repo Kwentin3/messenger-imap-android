@@ -274,6 +274,12 @@
             android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize" />
 
         <activity
+            android:name=".corporate.CorporateOnboardingActivity"
+            android:theme="@style/TextSecure.LightTheme"
+            android:exported="false"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize" />
+
+        <activity
             android:name=".relay.EditRelayActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateUnchanged"

@@ -64,6 +64,17 @@ Resulting APK files can be found in
 `build/outputs/apk/gplay/debug/` and
 `build/outputs/apk/fat/debug/`.
 
+For a single-device internal smoke build, build one ABI explicitly and pass the
+same ABI to Gradle:
+
+```
+$ scripts/ndk-make.sh arm64-v8a
+$ ./gradlew assembleFossDebug -PABI_FILTER=arm64-v8a
+```
+
+This keeps the APK ABI coverage aligned with the native core library produced
+by `scripts/ndk-make.sh`.
+
 ## Build Using Dockerfile
 
 Another way to build APK is to use provided `Dockerfile`

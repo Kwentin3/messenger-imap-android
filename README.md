@@ -6,14 +6,17 @@ This repository is the Android fork for Corporate IMAP Messenger, based on Delta
 
 Latest internal smoke build:
 
-- [GitHub Release: Android Internal Smoke APK 0.1.0](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.0)
-- Direct APK download: [messenger-imap-android-foss-debug-2.50.0.apk](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.0/messenger-imap-android-foss-debug-2.50.0.apk)
+- [GitHub Release: Android Internal Smoke APK 0.1.1](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.1)
+- Direct APK download: [messenger-imap-android-foss-debug-2.50.0.apk](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.1/messenger-imap-android-foss-debug-2.50.0.apk)
 - Recommended APK: `messenger-imap-android-foss-debug-2.50.0.apk`
-- SHA-256: `E50768D6DB2D1B26A76FB53A37D16ADD374E76DA544B9D2C8408B500AB320410`
-- Status: broken internal debug build, startup crash reported on Huawei during runtime smoke
-- Build commit: `8a51805d49ab5b36a551a7d80cf688b6e0cafb91`
+- SHA-256: `FB7FA4913A4E8161472B2C2A94D68F84927538D9A92782A336E2A5346F361110`
+- Status: internal debug build, runtime smoke pending
+- ABI coverage: `arm64-v8a`
+- Build commit: `61f9c4a8d1f6fc1de2fec8189ac4b16b996ef6a3`
 
-This build is not accepted for smoke testing anymore. It installs but crashes on launch on a Huawei device. It is not a production release and must not be distributed externally.
+This is an internal debug build for smoke testing only. It is not a production release and must not be distributed externally.
+
+Previous release [0.1.0](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.0) is broken and rejected for runtime smoke. It installs but crashes on launch on a Huawei device.
 
 ## Build Safety
 
@@ -26,12 +29,19 @@ scripts/ndk-make.sh
 
 Gradle now fails APK packaging when `libs/<abi>/libnative-utils.so` is missing. This prevents publishing installable APKs that crash on launch because the native core was not built.
 
+The current internal smoke APK was built as an `arm64-v8a` artifact:
+
+```bash
+scripts/ndk-make.sh arm64-v8a
+./gradlew assembleFossDebug -PABI_FILTER=arm64-v8a
+```
+
 ## Related repositories
 
 - [Main project / documentation repo](https://github.com/Kwentin3/messenger-imap)
 - [Android fork repo](https://github.com/Kwentin3/messenger-imap-android)
-- [Internal smoke release](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.0)
-- [Direct FOSS debug APK download](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.0/messenger-imap-android-foss-debug-2.50.0.apk)
+- [Internal smoke release](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.1)
+- [Direct FOSS debug APK download](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.1/messenger-imap-android-foss-debug-2.50.0.apk)
 
 ---
 

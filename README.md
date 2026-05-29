@@ -6,15 +6,18 @@ This repository is the Android fork for Corporate IMAP Messenger, based on Delta
 
 Latest internal smoke build:
 
-- [GitHub Release: Android Internal Smoke APK 0.1.1](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.1)
-- Direct APK download: [messenger-imap-android-foss-debug-2.50.0.apk](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.1/messenger-imap-android-foss-debug-2.50.0.apk)
+- [GitHub Release: Android Internal Smoke APK 0.1.2](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.2)
+- Direct APK download: [messenger-imap-android-foss-debug-2.50.0.apk](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.2/messenger-imap-android-foss-debug-2.50.0.apk)
 - Recommended APK: `messenger-imap-android-foss-debug-2.50.0.apk`
-- SHA-256: `FB7FA4913A4E8161472B2C2A94D68F84927538D9A92782A336E2A5346F361110`
+- SHA-256: `9510CEDBC9FA30099339A6B03DAAA6DBBFF1F8446406193B1BA1799F24A599EF`
 - Status: internal debug build, runtime smoke pending
 - ABI coverage: `arm64-v8a`
-- Build commit: `61f9c4a8d1f6fc1de2fec8189ac4b16b996ef6a3`
+- Build commit: `97eb105d25fde492fea5749e2b31b8b509538b8e`
+- Includes: corporate onboarding entry and local fallback invite-code placeholder states
 
 This is an internal debug build for smoke testing only. It is not a production release and must not be distributed externally.
+
+Previous release [0.1.1](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.1) installed and launched successfully on the owner's Huawei device, but it does not include the current corporate onboarding closeout slices.
 
 Previous release [0.1.0](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.0) is broken and rejected for runtime smoke. It installs but crashes on launch on a Huawei device.
 
@@ -40,8 +43,8 @@ scripts/ndk-make.sh arm64-v8a
 
 - [Main project / documentation repo](https://github.com/Kwentin3/messenger-imap)
 - [Android fork repo](https://github.com/Kwentin3/messenger-imap-android)
-- [Internal smoke release](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.1)
-- [Direct FOSS debug APK download](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.1/messenger-imap-android-foss-debug-2.50.0.apk)
+- [Internal smoke release](https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.2)
+- [Direct FOSS debug APK download](https://github.com/Kwentin3/messenger-imap-android/releases/download/android-internal-smoke-0.1.2/messenger-imap-android-foss-debug-2.50.0.apk)
 
 ---
 

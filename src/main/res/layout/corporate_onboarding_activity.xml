@@ -99,6 +99,14 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/corporate_external_contact_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/corporate_external_contact_status_placeholder"
+            android:textSize="16sp" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"

@@ -32,6 +32,20 @@ public final class CorporateDirectorySnapshot {
     return count;
   }
 
+  public List<CorporateDirectoryEntry> visibleEntriesFor(CorporateDirectoryPrincipalType viewerType) {
+    if (viewerType == CorporateDirectoryPrincipalType.INTERNAL_MEMBER) {
+      return entries;
+    }
+
+    List<CorporateDirectoryEntry> visibleEntries = new ArrayList<>();
+    for (CorporateDirectoryEntry entry : entries) {
+      if (entry.principalType == CorporateDirectoryPrincipalType.EXTERNAL_CONTACT) {
+        visibleEntries.add(entry);
+      }
+    }
+    return Collections.unmodifiableList(visibleEntries);
+  }
+
   public String toCanonicalPayload() {
     List<CorporateDirectoryEntry> sortedEntries = new ArrayList<>(entries);
     sortedEntries.sort(Comparator.comparing(entry -> entry.principalId));

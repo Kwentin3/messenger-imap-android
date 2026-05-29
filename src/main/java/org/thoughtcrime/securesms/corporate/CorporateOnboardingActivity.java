@@ -14,6 +14,7 @@ import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryFixtures
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryManifest;
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryPrincipalType;
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectorySnapshot;
+import org.thoughtcrime.securesms.corporate.external.CorporateExternalContactPolicy;
 import org.thoughtcrime.securesms.corporate.invite.CorporateInviteKind;
 import org.thoughtcrime.securesms.corporate.invite.CorporateInviteParser;
 import org.thoughtcrime.securesms.corporate.invite.CorporateInviteRoute;
@@ -58,6 +59,13 @@ public class CorporateOnboardingActivity extends BaseActionBarActivity {
                 snapshot.count(CorporateDirectoryPrincipalType.INTERNAL_MEMBER),
                 snapshot.count(CorporateDirectoryPrincipalType.EXTERNAL_CONTACT))
             : getString(R.string.corporate_onboarding_status_directory_hash_mismatch));
+
+    TextView externalContactStatus = findViewById(R.id.corporate_external_contact_status);
+    externalContactStatus.setText(
+        getString(
+            R.string.corporate_external_contact_status,
+            CorporateExternalContactPolicy.badgeFor(snapshot.entries.get(1)),
+            snapshot.visibleEntriesFor(CorporateDirectoryPrincipalType.EXTERNAL_CONTACT).size()));
 
     EditText fallbackCodeInput = findViewById(R.id.corporate_fallback_code_input);
     Button applyFallbackCodeButton = findViewById(R.id.corporate_apply_fallback_code_button);

@@ -44,6 +44,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/corporate_provider_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -56,6 +57,14 @@
             android:layout_marginTop="8dp"
             android:text="@string/corporate_onboarding_status_diagnostics"
             android:textSize="16sp" />
+
+        <Button
+            style="@style/ButtonSecondary"
+            android:id="@+id/corporate_transport_check_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/corporate_transport_check_requires_account" />
 
         <TextView
             android:layout_width="match_parent"

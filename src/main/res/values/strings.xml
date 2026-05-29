@@ -1245,6 +1245,18 @@
     <string name="perm_enable_bg_reminder_title">Tap here to receive messages while Delta Chat is in the background.</string>
     <string name="perm_enable_bg_already_done">You already allowed Delta Chat to receive messages in the background.\n\nIf messages still do not arrive in background, please also check your system settings.</string>
 
+    <!-- corporate MVP placeholders -->
+    <string name="corporate_onboarding_join_organization">Join organization</string>
+    <string name="corporate_onboarding_title">Corporate onboarding</string>
+    <string name="corporate_onboarding_summary">This placeholder will guide an invited employee or external contact through invite verification, provider setup, transport diagnostics, activation, and first directory sync.</string>
+    <string name="corporate_onboarding_status_invite">Invite: not resolved</string>
+    <string name="corporate_onboarding_status_email">Email verification: pending</string>
+    <string name="corporate_onboarding_status_provider">Provider setup: use existing account setup</string>
+    <string name="corporate_onboarding_status_diagnostics">Transport diagnostics: not checked</string>
+    <string name="corporate_onboarding_status_activation">Membership or external relationship activation: unavailable until Control Plane integration</string>
+    <string name="corporate_onboarding_status_directory">Directory sync: unavailable until activation</string>
+    <string name="corporate_onboarding_placeholder_note">No membership is created by this screen. APK install and app launch do not activate corporate access.</string>
+
     <!-- device messages for updates -->
     <string name="update_2_0">What\'s new?\n\n💯 End-to-end encryption is reliable and forever now. Padlocks 🔒 are gone!\n\n✉️ Classic email without end-to-end encryption is marked with a letter symbol\n\n😻 New enhanced profile screen for all your contacts\n\n🔲 New button for quick access to apps used in a chat\n\n❤️ Please donate to help us remain independent and continue to bring improvements: %1$s</string>
 </resources>

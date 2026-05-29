@@ -69,6 +69,16 @@
                 android:layout_marginBottom="16dp"
                 android:text="@string/onboarding_alternative_logins" />
 
+            <Button
+                style="@style/ButtonSecondary"
+                android:id="@+id/corporate_onboarding_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/corporate_onboarding_join_organization" />
+
 
         </LinearLayout>
 

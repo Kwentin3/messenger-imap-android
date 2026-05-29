@@ -1259,6 +1259,8 @@
     <string name="corporate_transport_check_requires_account">Set up account to check transport</string>
     <string name="corporate_onboarding_status_activation">Membership or external relationship activation: unavailable until Control Plane integration</string>
     <string name="corporate_onboarding_status_directory">Directory sync: unavailable until activation</string>
+    <string name="corporate_onboarding_status_directory_verified">Directory fixture: hash verified, %1$d internal member, %2$d external contact</string>
+    <string name="corporate_onboarding_status_directory_hash_mismatch">Directory fixture: hash mismatch</string>
     <string name="corporate_onboarding_placeholder_note">No membership is created by this screen. APK install and app launch do not activate corporate access.</string>
 
     <!-- device messages for updates -->

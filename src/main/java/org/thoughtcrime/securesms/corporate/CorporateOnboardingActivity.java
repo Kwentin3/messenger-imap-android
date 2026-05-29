@@ -9,6 +9,10 @@ import org.thoughtcrime.securesms.BaseActionBarActivity;
 import org.thoughtcrime.securesms.ConnectivityActivity;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.connect.DcHelper;
+import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryFixtures;
+import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryManifest;
+import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryPrincipalType;
+import org.thoughtcrime.securesms.corporate.directory.CorporateDirectorySnapshot;
 import org.thoughtcrime.securesms.util.ViewUtil;
 
 public class CorporateOnboardingActivity extends BaseActionBarActivity {
@@ -39,6 +43,17 @@ public class CorporateOnboardingActivity extends BaseActionBarActivity {
             : R.string.corporate_transport_check_requires_account);
     transportCheckButton.setOnClickListener(
         v -> startActivity(new Intent(this, ConnectivityActivity.class)));
+
+    CorporateDirectorySnapshot snapshot = CorporateDirectoryFixtures.sampleSnapshot();
+    CorporateDirectoryManifest manifest = CorporateDirectoryFixtures.sampleManifest(snapshot);
+    TextView directoryStatus = findViewById(R.id.corporate_directory_status);
+    directoryStatus.setText(
+        manifest.matches(snapshot)
+            ? getString(
+                R.string.corporate_onboarding_status_directory_verified,
+                snapshot.count(CorporateDirectoryPrincipalType.INTERNAL_MEMBER),
+                snapshot.count(CorporateDirectoryPrincipalType.EXTERNAL_CONTACT))
+            : getString(R.string.corporate_onboarding_status_directory_hash_mismatch));
   }
 
   @Override

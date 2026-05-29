@@ -1,3 +1,15 @@
+## Internal Android APK
+
+Latest internal smoke build:
+
+- GitHub Release: https://github.com/Kwentin3/messenger-imap-android/releases/tag/android-internal-smoke-0.1.0
+- Recommended APK: `messenger-imap-android-foss-debug-2.50.0.apk`
+- Status: runtime smoke pending
+- Build commit: `8a51805d49ab5b36a551a7d80cf688b6e0cafb91`
+- SHA-256: `E50768D6DB2D1B26A76FB53A37D16ADD374E76DA544B9D2C8408B500AB320410`
+
+This is an internal debug build for smoke testing only. It is not a production release and must not be distributed externally.
+
 ## Delta Chat Android Client
 
 This is the Android client for [Delta Chat](https://delta.chat/).

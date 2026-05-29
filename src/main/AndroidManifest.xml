@@ -276,8 +276,18 @@
         <activity
             android:name=".corporate.CorporateOnboardingActivity"
             android:theme="@style/TextSecure.LightTheme"
-            android:exported="false"
-            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize" />
+            android:exported="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="messenger-imap"
+                    android:host="invite"
+                    tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".relay.EditRelayActivity"

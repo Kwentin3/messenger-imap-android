@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import org.thoughtcrime.securesms.BaseActionBarActivity;
 import org.thoughtcrime.securesms.ConnectivityActivity;
@@ -13,6 +14,9 @@ import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryFixtures
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryManifest;
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryPrincipalType;
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectorySnapshot;
+import org.thoughtcrime.securesms.corporate.invite.CorporateInviteKind;
+import org.thoughtcrime.securesms.corporate.invite.CorporateInviteParser;
+import org.thoughtcrime.securesms.corporate.invite.CorporateInviteRoute;
 import org.thoughtcrime.securesms.util.ViewUtil;
 
 public class CorporateOnboardingActivity extends BaseActionBarActivity {
@@ -54,6 +58,43 @@ public class CorporateOnboardingActivity extends BaseActionBarActivity {
                 snapshot.count(CorporateDirectoryPrincipalType.INTERNAL_MEMBER),
                 snapshot.count(CorporateDirectoryPrincipalType.EXTERNAL_CONTACT))
             : getString(R.string.corporate_onboarding_status_directory_hash_mismatch));
+
+    EditText fallbackCodeInput = findViewById(R.id.corporate_fallback_code_input);
+    Button applyFallbackCodeButton = findViewById(R.id.corporate_apply_fallback_code_button);
+    applyFallbackCodeButton.setOnClickListener(
+        v -> applyInviteRoute(CorporateInviteParser.fromFallbackCode(fallbackCodeInput.getText().toString())));
+
+    applyInviteRoute(CorporateInviteParser.parse(getIntent().getData()));
+  }
+
+  @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    setIntent(intent);
+    applyInviteRoute(CorporateInviteParser.parse(intent.getData()));
+  }
+
+  private void applyInviteRoute(CorporateInviteRoute route) {
+    TextView inviteStatus = findViewById(R.id.corporate_invite_status);
+    if (!route.tokenPresent) {
+      inviteStatus.setText(R.string.corporate_onboarding_status_invite);
+      return;
+    }
+
+    int inviteKindString;
+    if (route.kind == CorporateInviteKind.INTERNAL) {
+      inviteKindString = R.string.corporate_invite_kind_internal;
+    } else if (route.kind == CorporateInviteKind.EXTERNAL) {
+      inviteKindString = R.string.corporate_invite_kind_external;
+    } else {
+      inviteKindString = R.string.corporate_invite_kind_unknown;
+    }
+
+    inviteStatus.setText(
+        getString(
+            R.string.corporate_onboarding_status_invite_resolved,
+            getString(inviteKindString),
+            route.redactedCode));
   }
 
   @Override

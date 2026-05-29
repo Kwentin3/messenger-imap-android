@@ -1250,6 +1250,12 @@
     <string name="corporate_onboarding_title">Corporate onboarding</string>
     <string name="corporate_onboarding_summary">This placeholder will guide an invited employee or external contact through invite verification, provider setup, transport diagnostics, activation, and first directory sync.</string>
     <string name="corporate_onboarding_status_invite">Invite: not resolved</string>
+    <string name="corporate_onboarding_status_invite_resolved">Invite: %1$s code received (%2$s)</string>
+    <string name="corporate_invite_kind_internal">internal</string>
+    <string name="corporate_invite_kind_external">external</string>
+    <string name="corporate_invite_kind_unknown">unknown</string>
+    <string name="corporate_fallback_code_hint">Fallback invite code</string>
+    <string name="corporate_apply_fallback_code">Apply code</string>
     <string name="corporate_onboarding_status_email">Email verification: pending</string>
     <string name="corporate_onboarding_status_provider">Provider setup: use existing account setup</string>
     <string name="corporate_onboarding_status_provider_custom_allowed">Provider setup: use existing Delta Chat account setup. Custom IMAP/SMTP remains available.</string>

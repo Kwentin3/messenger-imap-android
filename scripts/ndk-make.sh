@@ -78,10 +78,26 @@ if test -z "$CARGO_TARGET_DIR"; then
 fi
 
 TOOLCHAIN="$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/$NDK_HOST_TAG"
-export CARGO_TARGET_ARMV7_LINUX_ANDROIDEABI_LINKER="$TOOLCHAIN/bin/armv7a-linux-androideabi21-clang"
-export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER="$TOOLCHAIN/bin/aarch64-linux-android21-clang"
-export CARGO_TARGET_I686_LINUX_ANDROID_LINKER="$TOOLCHAIN/bin/i686-linux-android21-clang"
-export CARGO_TARGET_X86_64_LINUX_ANDROID_LINKER="$TOOLCHAIN/bin/x86_64-linux-android21-clang"
+CLANG_BIN_PREFIX="$TOOLCHAIN/bin/"
+CLANG_EXT=""
+BIN_EXT=""
+NDK_BUILD="$ANDROID_NDK_ROOT/ndk-build"
+case "$NDK_HOST_TAG" in
+    windows-*)
+        CLANG_EXT=".exe"
+        BIN_EXT=".exe"
+        NDK_BUILD="$ANDROID_NDK_ROOT/ndk-build.cmd"
+        if test "$ANDROID_NDK_CLANG_WRAPPER_DIR"; then
+            PATH="$ANDROID_NDK_CLANG_WRAPPER_DIR:$PATH"
+            CLANG_BIN_PREFIX=""
+        fi
+        ;;
+esac
+
+export CARGO_TARGET_ARMV7_LINUX_ANDROIDEABI_LINKER="${CLANG_BIN_PREFIX}armv7a-linux-androideabi21-clang$CLANG_EXT"
+export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER="${CLANG_BIN_PREFIX}aarch64-linux-android21-clang$CLANG_EXT"
+export CARGO_TARGET_I686_LINUX_ANDROID_LINKER="${CLANG_BIN_PREFIX}i686-linux-android21-clang$CLANG_EXT"
+export CARGO_TARGET_X86_64_LINUX_ANDROID_LINKER="${CLANG_BIN_PREFIX}x86_64-linux-android21-clang$CLANG_EXT"
 
 export RUSTUP_TOOLCHAIN=$(cat "$(dirname "$0")/rust-toolchain")
 
@@ -126,36 +142,36 @@ unset CPATH
 
 if test -z $1 || test $1 = armeabi-v7a; then
     echo "-- cross compiling to armv7-linux-androideabi (arm) --"
-    TARGET_CC="$TOOLCHAIN/bin/armv7a-linux-androideabi21-clang" \
-    TARGET_AR="$TOOLCHAIN/bin/llvm-ar" \
-    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib" \
+    TARGET_CC="${CLANG_BIN_PREFIX}armv7a-linux-androideabi21-clang$CLANG_EXT" \
+    TARGET_AR="$TOOLCHAIN/bin/llvm-ar$BIN_EXT" \
+    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib$BIN_EXT" \
     cargo build $RELEASEFLAG --target armv7-linux-androideabi -p deltachat_ffi
     cp "$CARGO_TARGET_DIR/armv7-linux-androideabi/$RELEASE/libdeltachat.a" "$jnidir/armeabi-v7a"
 fi
 
 if test -z $1 || test $1 = arm64-v8a; then
     echo "-- cross compiling to aarch64-linux-android (arm64) --"
-    TARGET_CC="$TOOLCHAIN/bin/aarch64-linux-android21-clang" \
-    TARGET_AR="$TOOLCHAIN/bin/llvm-ar" \
-    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib" \
+    TARGET_CC="${CLANG_BIN_PREFIX}aarch64-linux-android21-clang$CLANG_EXT" \
+    TARGET_AR="$TOOLCHAIN/bin/llvm-ar$BIN_EXT" \
+    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib$BIN_EXT" \
     cargo build $RELEASEFLAG --target aarch64-linux-android -p deltachat_ffi
     cp "$CARGO_TARGET_DIR/aarch64-linux-android/$RELEASE/libdeltachat.a" "$jnidir/arm64-v8a"
 fi
 
 if test -z $1 || test $1 = x86; then
     echo "-- cross compiling to i686-linux-android (x86) --"
-    TARGET_CC="$TOOLCHAIN/bin/i686-linux-android21-clang" \
-    TARGET_AR="$TOOLCHAIN/bin/llvm-ar" \
-    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib" \
+    TARGET_CC="${CLANG_BIN_PREFIX}i686-linux-android21-clang$CLANG_EXT" \
+    TARGET_AR="$TOOLCHAIN/bin/llvm-ar$BIN_EXT" \
+    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib$BIN_EXT" \
     cargo build $RELEASEFLAG --target i686-linux-android -p deltachat_ffi
     cp "$CARGO_TARGET_DIR/i686-linux-android/$RELEASE/libdeltachat.a" "$jnidir/x86"
 fi
 
 if test -z $1 || test $1 = x86_64; then
     echo "-- cross compiling to x86_64-linux-android (x86_64) --"
-    TARGET_CC="$TOOLCHAIN/bin/x86_64-linux-android21-clang" \
-    TARGET_AR="$TOOLCHAIN/bin/llvm-ar" \
-    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib" \
+    TARGET_CC="${CLANG_BIN_PREFIX}x86_64-linux-android21-clang$CLANG_EXT" \
+    TARGET_AR="$TOOLCHAIN/bin/llvm-ar$BIN_EXT" \
+    TARGET_RANLIB="$TOOLCHAIN/bin/llvm-ranlib$BIN_EXT" \
     cargo build $RELEASEFLAG --target x86_64-linux-android -p deltachat_ffi
     cp "$CARGO_TARGET_DIR/x86_64-linux-android/$RELEASE/libdeltachat.a" "$jnidir/x86_64"
 fi
@@ -165,10 +181,10 @@ echo -- ndk-build --
 cd ../..
 
 if test $1; then
-    "$ANDROID_NDK_ROOT/ndk-build" APP_ABI="$1"
+    "$NDK_BUILD" APP_ABI="$1"
 else
     # We are compiling for all architectures defined in Application.mk
-    "$ANDROID_NDK_ROOT/ndk-build"
+    "$NDK_BUILD"
 fi
 
 if test $1; then

@@ -161,6 +161,39 @@ android {
     }
 }
 
+tasks.register("verifyNativeCoreLibraries") {
+    group = "verification"
+    description = "Verifies that scripts/ndk-make.sh produced the native Delta Chat JNI libraries before APK packaging."
+
+    doLast {
+        def expectedAbis = getExpectedNativeCoreAbis()
+        def missingLibraries = expectedAbis.collect { abi ->
+            file("libs/${abi}/libnative-utils.so")
+        }.findAll { !it.isFile() }
+
+        if (!missingLibraries.isEmpty()) {
+            throw new GradleException("""Missing native Delta Chat core libraries:
+${missingLibraries.collect { " - ${it}" }.join("\n")}
+
+Run the native core build before Gradle:
+
+  scripts/ndk-make.sh
+  ./gradlew assembleDebug
+
+For a single-device development build, pass the device ABI to scripts/ndk-make.sh, for example:
+
+  scripts/ndk-make.sh arm64-v8a
+  ./gradlew assembleFossDebug
+
+Do not publish APKs built without libnative-utils.so; they can install but crash on launch.""")
+        }
+    }
+}
+
+tasks.named("preBuild").configure {
+    dependsOn(tasks.named("verifyNativeCoreLibraries"))
+}
+
 spotless {
     java {
         target 'src/*/java/**/*.java'
@@ -294,4 +327,17 @@ String getNdkArch() {
     def arch = properties.getProperty('NDK_ARCH')
     if (arch == null) return "\"\""
     return "\"$arch\""
+}
+
+List<String> getExpectedNativeCoreAbis() {
+    Properties properties = new Properties()
+    def file = project.rootProject.file('ndkArch')
+    if (file.exists()) {
+        properties.load(file.newDataInputStream())
+        def arch = properties.getProperty('NDK_ARCH')
+        if (arch != null && !arch.trim().isEmpty()) {
+            return [arch.trim()]
+        }
+    }
+    return ["armeabi-v7a", "arm64-v8a", "x86", "x86_64"]
 }

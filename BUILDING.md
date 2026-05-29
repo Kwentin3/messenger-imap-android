@@ -54,6 +54,12 @@ $ scripts/ndk-make.sh
 $ ./gradlew assembleDebug
 ```
 
+The Gradle build verifies that the native JNI wrapper library
+`libs/<abi>/libnative-utils.so` exists before APK packaging. If this file is
+missing, the build fails and asks you to run `scripts/ndk-make.sh` first.
+Do not publish APKs produced without this native core step; they can install
+but crash on launch when the app loads Delta Chat native code.
+
 Resulting APK files can be found in
 `build/outputs/apk/gplay/debug/` and
 `build/outputs/apk/fat/debug/`.
@@ -151,6 +157,8 @@ export PATH=${PATH}:${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bi
 
 After that, call `scripts/ndk-make.sh` in the root directory to build core-rust.
 Afterwards run the project in Android Studio. The project requires API 25.
+If Gradle reports missing `libnative-utils.so`, the native core build step has
+not completed for the ABI you are trying to package.
 
 With chance, that's it :) - if not, read on how to set up a proper development
 environment.

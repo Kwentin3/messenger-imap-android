@@ -15,6 +15,17 @@ Latest internal smoke build:
 
 This build is not accepted for smoke testing anymore. It installs but crashes on launch on a Huawei device. It is not a production release and must not be distributed externally.
 
+## Build Safety
+
+APK builds require the native Delta Chat core step before Gradle:
+
+```bash
+scripts/ndk-make.sh
+./gradlew assembleDebug
+```
+
+Gradle now fails APK packaging when `libs/<abi>/libnative-utils.so` is missing. This prevents publishing installable APKs that crash on launch because the native core was not built.
+
 ## Related repositories
 
 - [Main project / documentation repo](https://github.com/Kwentin3/messenger-imap)

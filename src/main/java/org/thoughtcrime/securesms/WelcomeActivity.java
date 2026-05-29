@@ -31,6 +31,7 @@ import java.io.OutputStream;
 import org.thoughtcrime.securesms.connect.AccountManager;
 import org.thoughtcrime.securesms.connect.DcEventCenter;
 import org.thoughtcrime.securesms.connect.DcHelper;
+import org.thoughtcrime.securesms.corporate.CorporateOnboardingActivity;
 import org.thoughtcrime.securesms.mms.AttachmentManager;
 import org.thoughtcrime.securesms.permissions.Permissions;
 import org.thoughtcrime.securesms.qr.BackupTransferActivity;
@@ -67,6 +68,7 @@ public class WelcomeActivity extends BaseActionBarActivity
 
     Button signUpButton = findViewById(R.id.signup_button);
     Button signInButton = findViewById(R.id.signin_button);
+    Button corporateOnboardingButton = findViewById(R.id.corporate_onboarding_button);
 
     View view = View.inflate(this, R.layout.login_options_view, null);
     AlertDialog signInDialog =
@@ -90,6 +92,8 @@ public class WelcomeActivity extends BaseActionBarActivity
     signUpButton.setOnClickListener(
         (v) -> startActivity(new Intent(this, InstantOnboardingActivity.class)));
     signInButton.setOnClickListener((v) -> signInDialog.show());
+    corporateOnboardingButton.setOnClickListener(
+        (v) -> startActivity(new Intent(this, CorporateOnboardingActivity.class)));
 
     registerForEvents();
     initializeActionBar();

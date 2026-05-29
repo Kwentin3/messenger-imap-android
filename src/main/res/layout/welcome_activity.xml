@@ -51,6 +51,24 @@
 
             <Button
                 style="@style/ButtonPrimary"
+                android:id="@+id/corporate_onboarding_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/corporate_onboarding_join_organization" />
+
+            <TextView
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:gravity="center"
+                android:text="@string/corporate_onboarding_welcome_hint"
+                android:textSize="14sp" />
+
+            <Button
+                style="@style/ButtonSecondary"
                 android:id="@+id/signup_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

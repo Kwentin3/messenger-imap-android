@@ -1251,6 +1251,14 @@
     <string name="corporate_onboarding_title">Corporate onboarding</string>
     <string name="corporate_onboarding_summary">Internal MVP placeholder for invited employees and external contacts. This screen prepares the corporate enrollment path but does not activate access yet.</string>
     <string name="corporate_onboarding_status_invite">Invite: required, not resolved in this placeholder</string>
+    <string name="corporate_invite_code_label">Fallback invite code</string>
+    <string name="corporate_invite_code_hint">INT-TEST-001 or EXT-TEST-001</string>
+    <string name="corporate_invite_check_button">Check invite code</string>
+    <string name="corporate_invite_status_empty">Enter an organization invite code or open an invite link. This check is local only.</string>
+    <string name="corporate_invite_status_internal">Internal organization invite detected. Membership still requires Control Plane verification, email ownership confirmation, provider setup, and policy activation.</string>
+    <string name="corporate_invite_status_external">External contact invite detected. This would continue as a scoped external relationship, not employee membership.</string>
+    <string name="corporate_invite_status_invalid">Invite code format is not recognized in this placeholder build.</string>
+    <string name="corporate_invite_placeholder_privacy_note">The code is checked locally, cleared after checking, not sent to a server, not saved, and not shown in the status.</string>
     <string name="corporate_onboarding_status_email">Email verification: pending</string>
     <string name="corporate_onboarding_status_provider">Provider setup: separate step through existing account setup or manual IMAP/SMTP</string>
     <string name="corporate_onboarding_status_diagnostics">Transport check: separate step, not proof of email ownership or membership</string>

@@ -1269,6 +1269,8 @@
     <string name="corporate_onboarding_status_directory_hash_mismatch">Directory fixture: hash mismatch</string>
     <string name="corporate_external_contact_status_placeholder">External contacts: pending directory sync</string>
     <string name="corporate_external_contact_status">%1$s contact badge available. External view fixture exposes %2$d scoped contact and not the full internal directory.</string>
+    <string name="corporate_release_status_placeholder">Release metadata: unavailable until Control Plane integration</string>
+    <string name="corporate_release_status">Release metadata: version %1$s, channel %2$s, status %3$s, SHA-256 %4$s</string>
     <string name="corporate_onboarding_placeholder_note">No membership is created by this screen. APK install and app launch do not activate corporate access.</string>
 
     <!-- device messages for updates -->

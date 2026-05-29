@@ -69,6 +69,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/corporate_diagnostics_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -104,6 +105,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/corporate_external_contact_status_placeholder"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/corporate_release_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/corporate_release_status_placeholder"
             android:textSize="16sp" />
 
         <TextView

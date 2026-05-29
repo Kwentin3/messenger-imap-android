@@ -7,9 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import org.thoughtcrime.securesms.BaseActionBarActivity;
+import org.thoughtcrime.securesms.BuildConfig;
 import org.thoughtcrime.securesms.ConnectivityActivity;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.connect.DcHelper;
+import org.thoughtcrime.securesms.corporate.diagnostics.CorporateSupportDiagnosticsSummary;
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryFixtures;
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryManifest;
 import org.thoughtcrime.securesms.corporate.directory.CorporateDirectoryPrincipalType;
@@ -18,6 +20,8 @@ import org.thoughtcrime.securesms.corporate.external.CorporateExternalContactPol
 import org.thoughtcrime.securesms.corporate.invite.CorporateInviteKind;
 import org.thoughtcrime.securesms.corporate.invite.CorporateInviteParser;
 import org.thoughtcrime.securesms.corporate.invite.CorporateInviteRoute;
+import org.thoughtcrime.securesms.corporate.releases.CorporateReleaseMetadata;
+import org.thoughtcrime.securesms.corporate.releases.CorporateReleasePolicy;
 import org.thoughtcrime.securesms.util.ViewUtil;
 
 public class CorporateOnboardingActivity extends BaseActionBarActivity {
@@ -49,6 +53,10 @@ public class CorporateOnboardingActivity extends BaseActionBarActivity {
     transportCheckButton.setOnClickListener(
         v -> startActivity(new Intent(this, ConnectivityActivity.class)));
 
+    TextView diagnosticsStatus = findViewById(R.id.corporate_diagnostics_status);
+    diagnosticsStatus.setText(
+        CorporateSupportDiagnosticsSummary.redactedSummary(configured, configured));
+
     CorporateDirectorySnapshot snapshot = CorporateDirectoryFixtures.sampleSnapshot();
     CorporateDirectoryManifest manifest = CorporateDirectoryFixtures.sampleManifest(snapshot);
     TextView directoryStatus = findViewById(R.id.corporate_directory_status);
@@ -66,6 +74,17 @@ public class CorporateOnboardingActivity extends BaseActionBarActivity {
             R.string.corporate_external_contact_status,
             CorporateExternalContactPolicy.badgeFor(snapshot.entries.get(1)),
             snapshot.visibleEntriesFor(CorporateDirectoryPrincipalType.EXTERNAL_CONTACT).size()));
+
+    CorporateReleaseMetadata releaseMetadata =
+        CorporateReleaseMetadata.localDebug(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
+    TextView releaseStatus = findViewById(R.id.corporate_release_status);
+    releaseStatus.setText(
+        getString(
+            R.string.corporate_release_status,
+            releaseMetadata.versionName,
+            releaseMetadata.channel,
+            CorporateReleasePolicy.status(releaseMetadata),
+            releaseMetadata.sha256));
 
     EditText fallbackCodeInput = findViewById(R.id.corporate_fallback_code_input);
     Button applyFallbackCodeButton = findViewById(R.id.corporate_apply_fallback_code_button);
